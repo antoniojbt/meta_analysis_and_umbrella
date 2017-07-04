@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# TODO: modify this for project_quickstart.py 
-
 # Example from: https://gist.github.com/kroger/3856835
 # Also see: http://www.sphinx-doc.org/en/1.5.1/config.html
 # With its example: http://www.sphinx-doc.org/en/1.5.1/config.html#example-of-configuration-file
@@ -31,8 +29,8 @@ add_function_parentheses = True
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
-project = u'Music for Geeks and Nerds'
-copyright = u'2012, Pedro Kroger'
+project = u'xxxxx'
+copyright = u''
 
 version = ''
 release = ''
@@ -68,7 +66,7 @@ latex_elements = {
      'inputenc': '',
      'classoptions': '',
      'utf8extra': '',
-     
+
 }
 
 latex_additional_files = ["mfgan-bw.sty", "mfgan.sty", "_static/cover.png"]
