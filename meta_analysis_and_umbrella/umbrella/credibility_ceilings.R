@@ -1,8 +1,8 @@
 #############################################
 # xxx.R - for xxx
 
-# Author: Antonio J Berlanga-Taylor
-# Date: 20 January 2017
+# Author: 
+# Date: 
 
 #Purpose
 #=======
@@ -29,7 +29,6 @@
 # Output
 
 # Use docopt, see
-#https://github.com/AntonioJBT/various.dir/blob/master/Notes-common-cmds/docopt_argument_parser.txt
 #https://github.com/docopt/docopt.R
 
 #############################################

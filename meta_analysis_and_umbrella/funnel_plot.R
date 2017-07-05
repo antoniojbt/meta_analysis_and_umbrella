@@ -1,8 +1,8 @@
 #############################################
 # xxx.R - for xxx
 
-# Author: Antonio J Berlanga-Taylor
-# Date: 20 January 2017
+# Author: 
+# Date: 
 
 #Purpose
 #=======
