@@ -141,7 +141,8 @@ metabias(mort1, method="linreg")
 # e.g.: so in this case Eggers test shows a significant p-value (0.0035) which is less than 0.05 
 # and thus this leads to rejecting the null hypothesis, of symmetry in the funnel plot.
  
-
+# *Small study effects: general term for the phenomenon of smaller studies to sometimes show different, often larger treatment effects
+# than larger ones (Sterne 2000). 
 
 #############################################
 # Plot:
