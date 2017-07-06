@@ -138,8 +138,9 @@ mort1 <- metabin(deaddef, alldef, deadnotdef, allnotdef, studlab=study, data=mor
 metabias(mort1, method="linreg")
 
 # RESULTS
-# e.g.: so in this case Eggers test shows a significant p-value (0.0035) which is less than 0.05 and thus this leads to rejecting the null hypothesis
-# of symmetry in the funnel plot.
+# e.g.: so in this case Eggers test shows a significant p-value (0.0035) which is less than 0.05 
+# and thus this leads to rejecting the null hypothesis, of symmetry in the funnel plot.
+ 
 
 
 #############################################
