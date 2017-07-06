@@ -105,7 +105,7 @@ dim()
 # Begg and Mazumdar test rank correlation (tau^2)
 metabias(metap1, method="rank")
 # Egger's test linear regression
-metabias(metap1, method="rank")
+metabias(metap1, method="linreg")
 #trim-and-fill method
 tf1 <- trimfill(metap1)
 #######
