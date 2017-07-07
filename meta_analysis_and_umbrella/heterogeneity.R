@@ -143,6 +143,11 @@ metabias(mort1, method="linreg")
  
 # *Small study effects: general term for the phenomenon of smaller studies to sometimes show different, often larger treatment effects
 # than larger ones (Sterne 2000). 
+# Funnel plot asymmetry also known as "small study effects". But it is wrongly equated with publication or other reporting biases. 
+# Funnel plot = scatter plot that shows the effect estimates from individual studies against some measure of each study's size or precision.
+# Usually standard error of the effect estimate is chosen as the measure of study size and it is plotted on the vertical axis with a reversed 
+# scale that places larger, more powerful studies at the top. Smaller studies would scatter at the bottom 
+# from (Sterne 2011)
 
 #############################################
 # Plot:
