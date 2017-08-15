@@ -1,4 +1,19 @@
 #############################################
+# Run with docopt for command line options:
+
+'Usage: credibility_ceilings.R [options]
+
+Options:
+-h --help          show this
+-I filename        input file name
+-O filename        output file name [default: ./credibility.tsv]
+-out_plot filename output plot name [default: ./credibility.plot]
+-c integer         credibility ceiling baseline [default: 25]
+-c_range           0 to 100 with desired step [default: c(0, 100, 5)]
+#############################################
+
+
+#############################################
 # credibility_ceilings.R 
 # Calculate credibility ceilings for umbrella reviews
 
@@ -14,49 +29,38 @@
 # Methods
 # Main reference:
 # http://www.jclinepi.com/article/S0895-4356(08)00259-X/fulltext
+#############################################
 
 
-# Usage
-#    xxx.R [options] [arguments]
-#    xxx.R --help
-
-#Options
-#-I    input file name.
-#-S    output file name.
-#-L    log file name.
-# Parameters needed for input:
-# Baseline c (credibility)
-# range of c to test (0 to 100 with desired step)
-
-
+#############################################
 # Input: 
 # A tab separated dataframe with columns ID and point estimate (usually a risk).
 # Assumes a header with labels "Study" and "HR"
 # TO DO: change to accept columns to be read
 # Example:
-"
-Study	Author	HR	N	Low CI	Upper CI	Site	Outcome	HR_Largest	HR_Fixed	HR_Random
-Ethier JL	Azab 2012 	4.09	316	1.69	9.9	Breast	OS	1.63	2.14	2.56
-Ethier JL	Azab 2013	3.6	437	2.13	6.08	Breast	OS	1.63	2.14	2.56
-Ethier JL	Bozkurt 2015	2.86	85	1.04	7.86	Breast	OS	1.63	2.14	2.56
-Ethier JL	Dirican 2015	1.91	1527	1.31	2.78	Breast	OS	1.63	2.14	2.56
-Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
-"
+# "
+# Study	Author	HR	N	Low CI	Upper CI	Site	Outcome	HR_Largest	HR_Fixed	HR_Random
+# Ethier JL	Azab 2012 	4.09	316	1.69	9.9	Breast	OS	1.63	2.14	2.56
+# Ethier JL	Azab 2013	3.6	437	2.13	6.08	Breast	OS	1.63	2.14	2.56
+# Ethier JL	Bozkurt 2015	2.86	85	1.04	7.86	Breast	OS	1.63	2.14	2.56
+# Ethier JL	Dirican 2015	1.91	1527	1.31	2.78	Breast	OS	1.63	2.14	2.56
+# Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
+# "
 
-# TO DO:
 # Output:
 # Forest plot
 # Data frame with inflated variances
-# 
 
 # TO DO:
 # Requirements:
 # library for CI plot, ceilings function (copy and place in repo)
 
-# Use docopt, see
-#https://github.com/AntonioJBT/various.dir/blob/master/Notes-common-cmds/docopt_argument_parser.txt
-#https://github.com/docopt/docopt.R
+# See:
+https://github.com/AntonioJBT/meta_analysis_and_umbrella
+
+for more information
 #############################################
+' -> doc
 
 
 ######################
@@ -97,10 +101,10 @@ Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
 # The  method  is  very  easy  to  use,  it involves  no  experts,  and  maps  the  ensuing
 # meta-analysis   results   as  a  function  of   the extent   of   scepticism   for   observational   research. 
 # It has the disadvantage that it penalizes exceedingly  the  more  conclusive  studies."
-######################
+#############################################
 
 
-######################
+#############################################
 # Method explanation and base assumptions
 # "Consider the synthesis of n studies. We assume that the outcome of each study i is normally distributed 
 # and summarized by an effect size yi with variance vi.
@@ -119,7 +123,7 @@ Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
 # (1 - c) / c
 # certainty that the effect is in the direction suggested by the point estimate versus not in this direction, 
 # if an effect does exist.
-######################
+#############################################
 
 
 #############################################
@@ -153,7 +157,23 @@ R_session_saved_image
 #############################################
 
 
-#############################
+#############################################
+# Print docopt options and messages:
+library(docopt)
+# Retrieve the command-line arguments:
+opts <- docopt(doc, '-h')
+# See:
+# https://cran.r-project.org/web/packages/docopt/docopt.pdf
+# https://www.slideshare.net/EdwindeJonge1/docopt-user2014
+# docopt(doc, args = commandArgs(TRUE), name = NULL, help = TRUE,
+# version = NULL, strict = FALSE, strip_names = !strict,
+# quoted_args = !strict)
+# Print to screen:
+str(opts)
+#############################################
+
+
+#############################################
 # Import libraries:
 library(meta)
 # library(ggplot2)
@@ -166,13 +186,6 @@ source('../code/meta_analysis_and_umbrella/ceiling.R')
 # Outputs new data, meata-analysis results after using inflated variance and forest plot
 # Requires ci.plot(), unavailable, but presumably provides meta-analysis and forest plots?
 ######################
-
-
-#############################################
-# TO DO: set with docopt
-# Set-up arguments:
-xxx_var <- as.character(args[1])
-#############################################
 
 
 ######################
