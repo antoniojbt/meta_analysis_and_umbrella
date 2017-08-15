@@ -76,13 +76,10 @@
 ######################
 
 # TO DO: delete, set PATHs properly.
-# setwd('/Users/antoniob/Documents/MRC_PHE_Imperial/MSc_students_Imperial/Meg_Cupp/')
+# setwd('/Users/antoniob/Documents/quickstart_projects/meta_analysis_and_umbrella/results/')
 
 ######################
-# library(meta)
-# library(rmeta)
-library(gdata)
-# library(metafor)
+library(meta)
 # library(ggplot2)
 
 # TO DO: check sourcing is searching PATH correctly at install
@@ -90,7 +87,7 @@ library(gdata)
 # http://www.dhe.med.uoi.gr/images/oldsite/assets/software/ceiling.txt
 # Inflates variance until there is "prob" to observe a result 
 # on the opposite direction than the point estimate
-source('ceiling.R')
+source('../code/meta_analysis_and_umbrella/ceiling.R')
 # Outputs new data, meata-analysis results after using inflated variance and forest plot
 # Requires ci.plot(), unavailable, but presumably provides meta-analysis and forest plots?
 ######################
@@ -99,7 +96,7 @@ source('ceiling.R')
 ######################
 # TO DO: switch to reading a tsv instead with standard input
 # datfile = "~/Google Drive/Dissertation/Chapters/Data Extraction/Data set.xlsx"
-datfile <- "Data set.xlsx"
+datfile <- '../../../data/raw/Meg_Data_set_Gynecological.txt'
 #Call "read.xls" to read the specific Excel data sheet
 dat <- read.xls(datfile, sheet="Gynecological", perl="/usr/bin/perl")
 str(dat)
