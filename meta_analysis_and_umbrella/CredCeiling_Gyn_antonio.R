@@ -1,16 +1,62 @@
-######################
+#############################################
+# credibility_ceilings.R 
 # Calculate credibility ceilings for umbrella reviews
-# 15 August 2017
+
+# Authors: 
+# Meg Cupp
+# Antonio Berlanga
+
+# Date: 15 August 2017
+
+# Purpose
+# Calculates credibility ceilings for point estimates from individual studies or meta-analysis
+
+# Methods
 # Main reference:
 # http://www.jclinepi.com/article/S0895-4356(08)00259-X/fulltext
 
+
+# Usage
+#    xxx.R [options] [arguments]
+#    xxx.R --help
+
+#Options
+#-I    input file name.
+#-S    output file name.
+#-L    log file name.
+# Parameters needed for input:
+# Baseline c (credibility)
+# range of c to test (0 to 100 with desired step)
+
+
+# Input: 
+# A tab separated dataframe with columns ID and point estimate (usually a risk).
+# Assumes a header with labels "Study" and "HR"
+# TO DO: change to accept columns to be read
+# Example:
+"
+Study	Author	HR	N	Low CI	Upper CI	Site	Outcome	HR_Largest	HR_Fixed	HR_Random
+Ethier JL	Azab 2012 	4.09	316	1.69	9.9	Breast	OS	1.63	2.14	2.56
+Ethier JL	Azab 2013	3.6	437	2.13	6.08	Breast	OS	1.63	2.14	2.56
+Ethier JL	Bozkurt 2015	2.86	85	1.04	7.86	Breast	OS	1.63	2.14	2.56
+Ethier JL	Dirican 2015	1.91	1527	1.31	2.78	Breast	OS	1.63	2.14	2.56
+Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
+"
+
 # TO DO:
-# convert to runnable script with docopt
-# Input: tab separated dataframe with columns ID and HR
 # Output:
-# Parameters: c (credibility), range of c to test (0 to 100 with desired step)
-# Requirements: library for CI plot, ceilings function (copy and place in repo)
-######################
+# Forest plot
+# Data frame with inflated variances
+# 
+
+# TO DO:
+# Requirements:
+# library for CI plot, ceilings function (copy and place in repo)
+
+# Use docopt, see
+#https://github.com/AntonioJBT/various.dir/blob/master/Notes-common-cmds/docopt_argument_parser.txt
+#https://github.com/docopt/docopt.R
+#############################################
 
 
 ######################
@@ -75,14 +121,43 @@
 # if an effect does exist.
 ######################
 
-# TO DO: delete, set PATHs properly.
+
+#############################################
+# Logging
+# TO DO: move to a separate script
+
+##Set working directory and file locations and names of required inputs:
 # setwd('/Users/antoniob/Documents/quickstart_projects/meta_analysis_and_umbrella/results/')
 
-######################
+#Direct output to file as well as printing to screen (plots aren't redirected though, each done separately). 
+#Input is not echoed to the output file either.
+output_file <- file(paste("R_session_output_",Sys.Date(),".txt", sep=""))
+output_file
+sink(output_file, append=TRUE, split=TRUE, type = c("output", "message"))
+
+#If the script can run from end to end, use source() with echo to execute and save all input 
+#to the output file (and not truncate 150+ character lines):
+#source(script_file, echo=TRUE, max.deparse.length=10000)
+
+#Record start of session and locations:
+Sys.time()
+print(paste('Working directory :', getwd()))
+getwd()
+
+# Re-load a previous R session, data and objects:
+#load('R_session_saved_image_order_and_match.RData', verbose=T)
+
+# Filename to save current R session, data and objects at the end:
+R_session_saved_image <- paste('R_session_saved_image_credibility','.RData', sep='')
+R_session_saved_image
+#############################################
+
+
+#############################
+# Import libraries:
 library(meta)
 # library(ggplot2)
 
-# TO DO: check sourcing is searching PATH correctly at install
 # The following is from:
 # http://www.dhe.med.uoi.gr/images/oldsite/assets/software/ceiling.txt
 # Inflates variance until there is "prob" to observe a result 
@@ -93,12 +168,20 @@ source('../code/meta_analysis_and_umbrella/ceiling.R')
 ######################
 
 
+#############################################
+# TO DO: set with docopt
+# Set-up arguments:
+xxx_var <- as.character(args[1])
+#############################################
+
+
 ######################
-# TO DO: switch to reading a tsv instead with standard input
-# datfile = "~/Google Drive/Dissertation/Chapters/Data Extraction/Data set.xlsx"
-datfile <- '../../../data/raw/Meg_Data_set_Gynecological.txt'
+# Read files:
+# TO DO: switch to reading a tsv instead with standard input, pass as arg
+datfile <- '../data/raw/Meg_Data_set_Gynecological.txt'
 #Call "read.xls" to read the specific Excel data sheet
-dat <- read.xls(datfile, sheet="Gynecological", perl="/usr/bin/perl")
+dat <- read.csv(datfile, header = TRUE, sep = '\t', stringsAsFactors = FALSE)
+dim(dat)
 str(dat)
 head(dat)
 tail(dat)
@@ -137,6 +220,10 @@ summary(dat$SD_logHR)
 summary(dat$yi_logHR)
 summary(dat$vi_logHR)
 
+# TO DO: handle NAs, currently assume complete cases
+# TO DO: Stop if not true
+length(complete.cases(dat$yi_logHR)) == nrow(dat)
+
 # 1A) Generate a random number u which falls within a normal distribution based 
 # on the SD and mean of the effect size for the study:
 # Random variable to represent studies which replicate effect:
@@ -163,25 +250,27 @@ dat$prob <- ifelse(dat$yi_logHR > 0,
                    pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = F),
                    pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = T)
                    )
+# TO DO: sanity, stop if less than zero or more than 1, other?
 # Convert to percentage for easier handling downstream:
 dat$prob <- dat$prob * 100
 summary(dat$prob)
 
 # 2A) Set a predefined credibility ceiling c (%) (arbitrary but should be justified):
 # TO DO: for scripting, set this as parameter
-cred <- 50
+cred <- 25 # TO DO: set this as parameter, 10% for grading evidence, 25% as minimal, this is arbitrary though
 
 # 2B) Is the probability of u being in the opposite direction to yi less than c?
 dat$probu_less_than_cred <- dat$prob < cred
 dat$probu_less_than_cred
-summary(dat$probu_less_than_cred)
+summary(dat$probu_less_than_cred) # higher count of TRUE better, rows with FALSE recalculate
 
+
+# TO DO: continue from here
 # If yes recalculate the variance (originally vi = (yi / Z_c) ^ 2) and inflate as:
 # v_i = max{(y_i / / Z_c)}
 # with z being the inverse of the cumulative normal distribution.
 # qnorm() provides this
 # or use ceiling.R function sourced above for this step
-
 dat$vi_logHR_inflated <- ifelse(dat$probu_less_than_cred == TRUE,
                                 (dat$yi_logHR / qnorm(dat$prob))^2,
                                 NA)
@@ -189,6 +278,45 @@ dat$vi_logHR_inflated <- ifelse(dat$probu_less_than_cred == TRUE,
 # 3. Re-run the meta-analyses using the inflated variances:
 
 # 4.Repeat steps 1–3 for a range of plausible credibility ceiling values.
-c_range <- seq(0, 100, 5)
-
+c_range <- seq(0, 100, 5) # TO DO: set this as parameter
 ######################
+
+
+#############################################
+# Plot:
+# png(paste('qqplot_', SNP_file, '.png', sep = ''))
+# plot(me)
+# dev.off()
+#############################################
+
+
+#############################################
+## Save some text:
+# cat(file = 'xxx.txt', xxx_var, "\t", xxx_var, '\n', append = TRUE)
+#############################################
+
+
+#############################################
+## Save a dataframe:
+# 
+#############################################
+
+
+#############################################
+# The end:
+# Remove objects that are not necessary to save:
+# ls()
+# object_sizes <- sapply(ls(), function(x) object.size(get(x)))
+# as.matrix(rev(sort(object_sizes))[1:10])
+#rm(list=ls(xxx))
+#objects_to_save <- (c('xxx_var'))
+#save(list=objects_to_save, file=R_session_saved_image, compress='gzip')
+
+# To save R workspace with all objects to use at a later time:
+save.image(file = R_session_saved_image, compress = 'gzip')
+
+sessionInfo()
+q()
+
+# Next: run the script for xxx
+#############################
