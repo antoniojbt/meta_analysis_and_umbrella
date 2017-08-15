@@ -17,25 +17,27 @@ See:
     http://www.jclinepi.com/article/S0895-4356(08)00259-X/fulltext
 
 
-To run you need Rscript credibility_ceilings.R
+To run type "Rscript credibility_ceilings.R -I FILENAME [options]"
 
-Usage:
-  credibility_ceilings.R -I <input_filename>
+Usage: 
+  credibility_ceilings.R -I <input_filename> [options]
 
 Options:
 -h --help          show this
--I filename        input file name
--O filename        output file name [default: ./credibility.tsv]
--out_plot filename output plot name [default: ./credibility.plot]
--c integer         credibility ceiling baseline [default: 25]
--c_range           0 to 100 with desired step [default: c(0, 100, 5)]
+-v --version       show current version
+-I                 input file name
+-O                 output file name [default: credibility.tsv]
+--plot_name        output plot name [default: credibility.plot]
+-c                 credibility ceiling baseline, integer [default: 25]
+-c_min             minimum credibility value to test (0 to 1 with step) [default: 0]
+-c_max             maximum credibility value to test (0 to 1 with step) [default: 1]
+-c_step            desired step for credibility values to test [default: 0.05]
 
 Input: 
     A tab separated dataframe with columns ID and point estimate (usually a risk).
     Assumes a header with labels "Study" and "HR"
 
 Input file example:
-
 Study	Author	HR	N	Low CI	Upper CI	Site	Outcome	HR_Largest	HR_Fixed	HR_Random
 Ethier JL	Azab 2012 	4.09	316	1.69	9.9	Breast	OS	1.63	2.14	2.56
 Ethier JL	Azab 2013	3.6	437	2.13	6.08	Breast	OS	1.63	2.14	2.56
@@ -59,16 +61,17 @@ https://github.com/AntonioJBT/meta_analysis_and_umbrella
 # Print docopt options and messages:
 library(docopt, quietly = TRUE)
 # Retrieve the command-line arguments:
-opts <- docopt(doc) #, '-h')
+opt <- docopt(doc, version = 0.1)
 # See:
 # https://cran.r-project.org/web/packages/docopt/docopt.pdf
 # https://www.slideshare.net/EdwindeJonge1/docopt-user2014
+# http://rgrannell1.github.io/blog/2014/08/04/command-line-interfaces-in-r/
 # docopt(doc, args = commandArgs(TRUE), name = NULL, help = TRUE,
 # version = NULL, strict = FALSE, strip_names = !strict,
 # quoted_args = !strict)
 
 # Print to screen:
-str(opts)
+str(opt)
 #############################################
 
 
@@ -144,7 +147,7 @@ str(opts)
 
 #Direct output to file as well as printing to screen (plots aren't redirected though, each done separately). 
 #Input is not echoed to the output file either.
-output_file <- file(paste("R_session_output_",Sys.Date(),".txt", sep=""))
+output_file <- file(paste("R_session_output_credibility",Sys.Date(),".txt", sep=""))
 output_file
 sink(output_file, append=TRUE, split=TRUE, type = c("output", "message"))
 
@@ -175,6 +178,9 @@ library(meta)
 # http://www.dhe.med.uoi.gr/images/oldsite/assets/software/ceiling.txt
 # Inflates variance until there is "prob" to observe a result 
 # on the opposite direction than the point estimate
+# TO DO:
+# A general path to where this script lives needs to be set, this will error otherwise 
+# if called from different cwd
 source('../code/meta_analysis_and_umbrella/ceiling.R')
 # Outputs new data, meata-analysis results after using inflated variance and forest plot
 # Requires ci.plot(), unavailable, but presumably provides meta-analysis and forest plots?
@@ -183,9 +189,10 @@ source('../code/meta_analysis_and_umbrella/ceiling.R')
 
 ######################
 # Read files:
-# TO DO: switch to reading a tsv instead with standard input, pass as arg
-datfile <- '../data/raw/Meg_Data_set_Gynecological.txt'
-#Call "read.xls" to read the specific Excel data sheet
+# datfile <- '../data/raw/Meg_Data_set_Gynecological.txt'
+# TO DO: errors
+datfile <- as.character(opt$`I`)#[["-I"]]) # Read from docopt option from command line argument
+# datfile <- as.character(opt $ `-I`) # Read from docopt option from command line argument
 dat <- read.csv(datfile, header = TRUE, sep = '\t', stringsAsFactors = FALSE)
 dim(dat)
 str(dat)
@@ -219,7 +226,6 @@ summary(dat$SD_logHR)
 
 
 ######################
-# TO DO:
 # Obtain credibility ceilings
 # 1) For each study, calculate the probability that an observed effect with sampling variance vi
 # would be on the opposite direction of the true effect.
@@ -253,17 +259,17 @@ hist(dat$ui_logHR)
 # P(u < 0 | yi > 0)
 # TO DO: check lower.tail settings for pnorm
 dat$prob <- ifelse(dat$yi_logHR > 0,
-                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = F),
-                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = T)
+                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = T),
+                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = F)
                    )
 # TO DO: sanity, stop if less than zero or more than 1, other?
-# Convert to percentage for easier handling downstream:
-dat$prob <- dat$prob * 100
+dat$prob
 summary(dat$prob)
 
 # 2A) Set a predefined credibility ceiling c (%) (arbitrary but should be justified):
-# TO DO: for scripting, set this as parameter
-cred <- 25 # TO DO: set this as parameter, 10% for grading evidence, 25% as minimal, this is arbitrary though
+# 10% for grading evidence, 25% as minimal, this is arbitrary though
+cred <- 0.25 # Use values from 0 to 1 only
+cred <- as.integer(opt $ `-c`)
 
 # 2B) Is the probability of u being in the opposite direction to yi less than c?
 dat$probu_less_than_cred <- dat$prob < cred
@@ -271,27 +277,36 @@ dat$probu_less_than_cred
 summary(dat$probu_less_than_cred) # higher count of TRUE better, rows with FALSE recalculate
 
 
-# TO DO: continue from here
+# TO DO: check what needs setting for mean and sd for qnorm
 # If yes recalculate the variance (originally vi = (yi / Z_c) ^ 2) and inflate as:
 # v_i = max{(y_i / / Z_c)}
 # with z being the inverse of the cumulative normal distribution.
 # qnorm() provides this
 # or use ceiling.R function sourced above for this step
 dat$vi_logHR_inflated <- ifelse(dat$probu_less_than_cred == TRUE,
-                                (dat$yi_logHR / qnorm(dat$prob))^2,
-                                NA)
+                                (-dat$yi_logHR / qnorm(dat$prob))^2,
+                                (-dat$yi_logHR / qnorm(1 - dat$prob))^2
+                                )
+dat$vi_logHR_inflated
+summary(dat$vi_logHR_inflated)
 
 # 3. Re-run the meta-analyses using the inflated variances:
+# TO DO: pass these results to new script, else use the ceilings.R script
 
 # 4.Repeat steps 1–3 for a range of plausible credibility ceiling values.
-c_range <- seq(0, 100, 5) # TO DO: set this as parameter
+# c_range <- seq(0, 1, 0.05)
+# TO DO:
+c_min <- as.integer(opt $ `-c_min`)
+c_max <- as.integer(opt $ `-c_max`)
+c_step <- as.integer(opt $ `-c_step`)
+c_range <- seq(c_min, c_max, c_step)
 ######################
 
 
 #############################################
 # Plot:
-# png(paste('qqplot_', SNP_file, '.png', sep = ''))
-# plot(me)
+# svg(paste('qqplot_', SNP_file, '.svg', sep = ''))
+# plot()
 # dev.off()
 #############################################
 
