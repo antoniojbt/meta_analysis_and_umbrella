@@ -190,7 +190,7 @@ source('../code/meta_analysis_and_umbrella/ceiling.R')
 ######################
 # Read files:
 # datfile <- '../data/raw/Meg_Data_set_Gynecological.txt'
-# TO DO: errors
+# TO DO: errors, no good example of how to pass arguments
 datfile <- as.character(opt$`I`)#[["-I"]]) # Read from docopt option from command line argument
 # datfile <- as.character(opt $ `-I`) # Read from docopt option from command line argument
 dat <- read.csv(datfile, header = TRUE, sep = '\t', stringsAsFactors = FALSE)
@@ -257,7 +257,7 @@ hist(dat$ui_logHR)
 # P(u > 0 | yi < 0)
 # or
 # P(u < 0 | yi > 0)
-# TO DO: check lower.tail settings for pnorm
+# TO DO: continue here, check lower.tail settings for pnorm
 dat$prob <- ifelse(dat$yi_logHR > 0,
                    pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = T),
                    pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = F)
@@ -277,7 +277,7 @@ dat$probu_less_than_cred
 summary(dat$probu_less_than_cred) # higher count of TRUE better, rows with FALSE recalculate
 
 
-# TO DO: check what needs setting for mean and sd for qnorm
+# TO DO: check setting for mean and sd for qnorm, default is 0 and 1
 # If yes recalculate the variance (originally vi = (yi / Z_c) ^ 2) and inflate as:
 # v_i = max{(y_i / / Z_c)}
 # with z being the inverse of the cumulative normal distribution.
