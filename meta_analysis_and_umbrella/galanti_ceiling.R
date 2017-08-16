@@ -15,7 +15,7 @@
 
 
 ######################
-ceiling_data <- function(means, vars, prob) {  
+ceiling.data <- function(means, vars, prob) {  
   if(length(prob) < length(means)) {
     probability <- rep(prob, length(means))
   }

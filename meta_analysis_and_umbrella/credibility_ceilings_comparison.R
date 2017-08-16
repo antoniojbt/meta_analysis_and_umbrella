@@ -163,7 +163,7 @@ pnorm(dat$ui_logHR[index_lower], lower.tail = T)#, mean = dat$yi_logHR[index], s
 dat$prob <- ifelse(dat$yi_logHR > 0,
                    pnorm(dat$ui_logHR, lower.tail = F), #mean = dat$yi_logHR, sd = dat$SD_logHR)
                    pnorm(dat$ui_logHR, lower.tail = T) #mean = dat$yi_logHR, sd = dat$SD_logHR)
-)
+                   )
 # TO DO: sanity, stop if less than zero or more than 1, other?
 dat$prob
 
@@ -196,12 +196,11 @@ dat$probu_less_than_cred
 summary(dat$probu_less_than_cred)
 
 # TO DO: check setting for mean and sd for qnorm, default is 0 and 1
-# If yes recalculate the variance (originally vi = (yi / Z_c) ^ 2) and inflate as:
-# v_i = max{(y_i / / Z_c)}
+# If yes recalculate the variance (vi = (yi / Z_c) ^ 2) and inflate according to c value
 # with z being the inverse of the cumulative normal distribution.
 
 dat$vi_logHR_inflated <- ifelse(dat$probu_less_than_cred == TRUE,
-                                dat$yi_logHR / qnorm(cred),
+                                (dat$yi_logHR / qnorm(cred))^2,
                                 dat$vi_logHR
                                 )
 dat$vi_logHR_inflated
@@ -210,6 +209,11 @@ hist(dat$vi_logHR_inflated)
 dat$equal_var <- dat$vi_logHR_inflated == dat$vi_logHR
 summary(dat$equal_var) # new variance is the same as the old one, i.e. prob of u is higher than c
 summary(dat$probu_less_than_cred) # Sanity, inverted results should be the same
+
+# Sanity, old and new variances should be the same:
+summary(dat[which(dat$equal_var == TRUE), c('Study', 'vi_logHR', 'vi_logHR_inflated')])
+# Differences in variances:
+summary(dat[which(dat$equal_var == FALSE), c('Study', 'vi_logHR', 'vi_logHR_inflated')])
 ###########
 
 ###########
@@ -224,7 +228,9 @@ dim(dat[which(dat$equal_var == FALSE), ])
 ############
 # 3. Re-run the meta-analyses using the inflated variances:
 # TO DO: pass these results to new script, else use the ceilings.R script
-meta_rma <- rma(data = dat_inflate,
+pass_data <- galanti_inflated
+
+meta_rma <- rma(data = pass_data,
                 yi = yi_logHR,
                 vi = vi_logHR_inflated,
                 method = "REML", # "DL"

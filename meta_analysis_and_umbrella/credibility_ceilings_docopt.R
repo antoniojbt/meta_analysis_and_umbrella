@@ -181,7 +181,7 @@ library(meta)
 # TO DO:
 # A general path to where this script lives needs to be set, this will error otherwise 
 # if called from different cwd
-source('../code/meta_analysis_and_umbrella/ceiling.R')
+# source('../code/meta_analysis_and_umbrella/galanti_ceiling.R')
 # Outputs new data, meata-analysis results after using inflated variance and forest plot
 # Requires ci.plot(), unavailable, but presumably provides meta-analysis and forest plots?
 ######################
@@ -267,7 +267,7 @@ dat$SD_logHR[index_greater] # TO DO: large SD, is this correct? Double check...
 pnorm(dat$ui_logHR[index_greater], lower.tail = F)#, mean = dat$yi_logHR[index], sd = dat$SD_logHR[index])
 # One case (row), yi < 0:
 index_lower <- which(dat$yi_logHR < 0)[1]
-pnorm(dat$ui_logHR[index_lower], lower.tail = T) #mean = dat$yi_logHR[index], sd = dat$SD_logHR[index])
+pnorm(dat$ui_logHR[index_lower], lower.tail = T) #, mean = dat$yi_logHR[index], sd = dat$SD_logHR[index])
 # All cases:
 dat$prob <- ifelse(dat$yi_logHR > 0,
                    pnorm(dat$ui_logHR, lower.tail = F), #mean = dat$yi_logHR, sd = dat$SD_logHR)
@@ -281,36 +281,68 @@ summary(dat$prob)
 hist(dat$prob)
 head(dat[which(dat$prob > 0.50), ])#c('Study', 'ui_logHR', 'HR', 'yi_logHR')]
 # View(dat[which(dat$prob > 0.50), ])
+###########
 
+###########
 # 2A) Set a predefined credibility ceiling c (%) (arbitrary but should be justified):
-# 0 corresponds to random effects model, 
+# Use values from 0 to 1 only.
+# 0% corresponds to random effects model, 
 # 10% arbitrary cut-off for grading evidence
 # 25% as arbitrary rule of thumb minimal, higher is better
-cred <- 0.1 # Use values from 0 to 1 only
+# Lower c, higher certainty that the effect observed is towards the true effect (direction at least)
+cred <- 0.25
 cred <- as.integer(opt $ `-c`)
+# Interpretation, from main ref:
+# It is assumed that a single study of this type can never give more than
+(1 - cred) / cred
+# times the certainty that the effect is in the direction suggested by the point estimate versus not in this direction,
+# if an effect does exist.
+###########
 
+###########
 # 2B) Is the probability of u being in the opposite direction to yi less than c?
 dat$probu_less_than_cred <- dat$prob < cred
 dat$probu_less_than_cred
-summary(dat$probu_less_than_cred) # higher count of TRUE better, rows with FALSE recalculate
-
+summary(dat$probu_less_than_cred)
 
 # TO DO: check setting for mean and sd for qnorm, default is 0 and 1
-# If yes recalculate the variance (originally vi = (yi / Z_c) ^ 2) and inflate as:
-# v_i = max{(y_i / / Z_c)}
+# If yes recalculate the variance (vi = (yi / Z_c) ^ 2) and inflate according to c value
 # with z being the inverse of the cumulative normal distribution.
-# qnorm() provides this
-# or use ceiling.R function sourced above for this step
+
 dat$vi_logHR_inflated <- ifelse(dat$probu_less_than_cred == TRUE,
-                                (-dat$yi_logHR / qnorm(dat$prob))^2,
-                                (-dat$yi_logHR / qnorm(1 - dat$prob))^2
+                                (dat$yi_logHR / qnorm(cred))^2,
+                                dat$vi_logHR
                                 )
 dat$vi_logHR_inflated
 summary(dat$vi_logHR_inflated)
+hist(dat$vi_logHR_inflated)
+dat$equal_var <- dat$vi_logHR_inflated == dat$vi_logHR
+summary(dat$equal_var) # new variance is the same as the old one, i.e. prob of u is higher than c
+summary(dat$probu_less_than_cred) # Sanity, inverted results should be the same
 
+# Sanity, old and new variances should be the same:
+summary(dat[which(dat$equal_var == TRUE), c('Study', 'vi_logHR', 'vi_logHR_inflated')])
+# Differences in variances:
+summary(dat[which(dat$equal_var == FALSE), c('Study', 'vi_logHR', 'vi_logHR_inflated')])
+###########
+
+###########
 # 3. Re-run the meta-analyses using the inflated variances:
 # TO DO: pass these results to new script, else use the ceilings.R script
+pass_data <- galanti_inflated
 
+meta_rma <- rma(data = pass_data,
+                yi = yi_logHR,
+                vi = vi_logHR_inflated,
+                method = "REML", # "DL"
+                slab = dat_inflate$Study,
+                digits = 2)
+
+print(meta_rma)
+# forest(meta_rma)
+############
+
+############
 # 4.Repeat steps 1–3 for a range of plausible credibility ceiling values.
 # c_range <- seq(0, 1, 0.05)
 # TO DO:
