@@ -252,23 +252,41 @@ hist(dat$yi_logHR)
 hist(dat$HR)
 hist(dat$ui_logHR)
 
-# 1B) Get the probability that u is in the opposite direction to the estimate observed:
+# 1B) Get the probability that u is in the opposite direction to the estimate observed
+# Use mean and SD from point estimate? Else will be 0 an 1, with log this should be appropriate
 # No effect: for HR = 1, for log = 0
-# P(u > 0 | yi < 0)
-# or
 # P(u < 0 | yi > 0)
-# TO DO: continue here, check lower.tail settings for pnorm
+# or
+# P(u > 0 | yi < 0)
+# TO DO: continue here, check lower.tail settings for pnorm, this is the inverse of the cum. dist.
+# One case (row), yi > 0:
+index_greater <- which(dat$yi_logHR > 0)[1]
+dat$ui_logHR[index_greater]
+dat$yi_logHR[index_greater]
+dat$SD_logHR[index_greater] # TO DO: large SD, is this correct? Double check...
+pnorm(dat$ui_logHR[index_greater], lower.tail = F)#, mean = dat$yi_logHR[index], sd = dat$SD_logHR[index])
+# One case (row), yi < 0:
+index_lower <- which(dat$yi_logHR < 0)[1]
+pnorm(dat$ui_logHR[index_lower], lower.tail = T) #mean = dat$yi_logHR[index], sd = dat$SD_logHR[index])
+# All cases:
 dat$prob <- ifelse(dat$yi_logHR > 0,
-                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = T),
-                   pnorm(dat$ui_logHR, mean = dat$yi_logHR, sd = dat$SD_logHR, lower.tail = F)
+                   pnorm(dat$ui_logHR, lower.tail = F), #mean = dat$yi_logHR, sd = dat$SD_logHR)
+                   pnorm(dat$ui_logHR, lower.tail = T) #mean = dat$yi_logHR, sd = dat$SD_logHR)
                    )
 # TO DO: sanity, stop if less than zero or more than 1, other?
 dat$prob
+
+# Explore values, check distributions, as expected?
 summary(dat$prob)
+hist(dat$prob)
+head(dat[which(dat$prob > 0.50), ])#c('Study', 'ui_logHR', 'HR', 'yi_logHR')]
+# View(dat[which(dat$prob > 0.50), ])
 
 # 2A) Set a predefined credibility ceiling c (%) (arbitrary but should be justified):
-# 10% for grading evidence, 25% as minimal, this is arbitrary though
-cred <- 0.25 # Use values from 0 to 1 only
+# 0 corresponds to random effects model, 
+# 10% arbitrary cut-off for grading evidence
+# 25% as arbitrary rule of thumb minimal, higher is better
+cred <- 0.1 # Use values from 0 to 1 only
 cred <- as.integer(opt $ `-c`)
 
 # 2B) Is the probability of u being in the opposite direction to yi less than c?
