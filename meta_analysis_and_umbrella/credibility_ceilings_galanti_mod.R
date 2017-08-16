@@ -103,7 +103,8 @@ galanti_inflated <- ceiling_data(dat$Study, dat$yi_logHR, dat$vi_logHR, prob = 0
 dim(galanti_inflated)
 head(galanti_inflated)
 tail(galanti_inflated)
-galanti_inflated[which(galanti_inflated$equal_var == FALSE), ]
+nrow(galanti_inflated[which(galanti_inflated$equal_var == FALSE), ])
+head(galanti_inflated[which(galanti_inflated$equal_var == FALSE), ])
 ######################
 
 ############
