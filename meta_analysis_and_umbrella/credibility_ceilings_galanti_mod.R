@@ -108,7 +108,10 @@ galanti_inflated[which(galanti_inflated$equal_var == FALSE), ]
 
 ############
 # 3. Re-run the meta-analyses using the inflated variances:
-# TO DO: pass these results to new script
+# TO DO: pass these results to random effects model script, generate dataframe with results and forest plot
+# TO DO: Update to library(meta)
+# library(metafor)
+# library(meta)
 pass_data <- galanti_inflated
 
 meta_rma <- rma(data = pass_data,
@@ -125,7 +128,7 @@ print(meta_rma)
 ############
 # 4.Repeat steps 1–3 for a range of plausible credibility ceiling values.
 # c_range <- seq(0, 1, 0.05)
-# TO DO:
+# TO DO
 
 ############
 ######################
