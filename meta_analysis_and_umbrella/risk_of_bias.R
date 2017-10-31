@@ -106,6 +106,13 @@ dim()
 metabias(metap1, method="rank")
 # Egger's test linear regression
 metabias(metap1, method="linreg")
+
+# Null-hypothesis of the test: no bias in a meta-analysis 
+# Determine the alpha-level i.e significance level. Say it will be 0.05
+# Then If the p-value is less than or equal to the set alpha (p< 0.05), then we reject the null hypothesis...
+
+
+
 #trim-and-fill method
 tf1 <- trimfill(metap1)
 #######
