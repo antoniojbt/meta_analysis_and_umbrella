@@ -230,6 +230,5 @@ View(nen)
 metaprop(vddch, totch, studlab=(study), data=nen)
 
 
-
-
+*uses default: Clopper-Pearson (for confidence interval calculation) and PLOGIT for transformations of proportions
 
