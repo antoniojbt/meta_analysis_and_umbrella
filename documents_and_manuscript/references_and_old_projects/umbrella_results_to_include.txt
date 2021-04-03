@@ -1,0 +1,44 @@
+---------------
+Main results:
+- Description and characteristics of studies
+- Reproducibility, excess significance and credibility ceilings
+- Summary of effect sizes, heterogeneity between studies, and bias tests
+(small study effects and publication bias)
+- Consistency of results between studies
+- Grading of evidence (we need to add something regarding effect size to
+the adiposity BMJ criteria if possible, otherwise apply as they have)
+- Funnel and forest plot of all included studies
+
+Additional:
+- Analysis of quality of each meta-analysis: we'll end up having to
+randomise to select ~10-15% of studies and assess with one of the
+available tools.
+
+Figures and tables:
+- Study flow-chart
+- Description of biomarkers, outcomes and sites
+- Consistency of results:
+    + Association of meta-analysis summary effect sizes with inverse of
+the variance (as discussed today for Fig. 1 of the adiposity and cancer
+BMJ paper)
+    + Correlation of summary effect size in each study assessed
+(meta-analysis) and  summary risk statistic in the  largest individual
+study. (see the VD umbrella BMJ paper, supplementary info)
+    + Assessment of I^2, upper and lower CIs
+    + Distributions of Egger's
+    + ?
+- General characteristics of non-overlapping meta-analyses (this can be
+a single, expanded supplementary table 1 with a reduced main table 1)
+- Summary of evidence grading (a summary table)
+
+Supplementary:
+- Excluded studies table
+- Sensitivity analysis with credibility ceilings
+- Details of evidence grading for each study (as supplementary table)
+
+Additional:
+- How to take advantage of duplicate studies? Check overall concordance,
+number of duplicated studies, degree of overlap. e.g. How much research
+is wasted/low quality? Are results largely concordant?
+- Meta-regression needed?
+------------------

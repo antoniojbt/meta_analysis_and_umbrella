@@ -1,0 +1,23 @@
+
+
+    What is the direction of effect?
+
+    What is the size of effect?
+
+    Is the effect consistent across studies?
+
+    What is the strength of evidence for the effect?
+
+
+
+Random effects MA
+http://handbook.cochrane.org/index.htm#chapter_9/9_1_introduction.htm
+http://handbook.cochrane.org/index.htm#chapter_9/9_1_introduction.htm
+The basic data required for the analysis are therefore an estimate of the intervention effect and its standard error from each study.
+
+
+Estimates and their standard errors may be entered directly into RevMan under the ‘Generic inverse variance’ outcome. The software will undertake fixed-effect meta-analyses and random-effects (DerSimonian and Laird) meta-analyses, along with assessments of heterogeneity. 
+For ratio measures of intervention effect, the data should be entered as natural logarithms (for example as a log odds ratio and the standard error of the log odds ratio).
+
+
+To compute a summary odds ratio (OR), we used the adjusted OR and its 95% CI in all analyses. The hazard ratio (HR) was considered as the OR directly

@@ -1,0 +1,60 @@
+Main results:
+
+- Description and characteristics of studies
+- Reproducibility, excess significance and credibility ceilings
+- Summary effect size, heterogeneity between studies, and bias tests (small study effects and publication bias)
+- Overall quality of studies (this can be numerical only, not ROBIS, see some of the plots suggested below)
+- Grading of evidence
+
+Also consider (from the VD paper):
+
+- Significant observational associations without hints of bias
+- Meta-analyses of randomised controlled trials of vitamin D supplementation
+- Comparison of findings from observational studies and clinical trials
+
+
+Figures and tables:
+- Study flow-chart
+- Description of biomarkers, outcomes and sites
+- Consistency of results:
+
+    + Association of meta-analysis summary effect sizes with inverse of the variance
+    + Correlation of summary effect size in each study assessed (meta-analysis) and  summary risk statistic in the  largest individual study.
+
+- General characteristics of non-overlapping meta-analyses
+- Summary of evidence grading
+
+See also:
+
+- VD umbrella: Table 5 Overlap between meta-analyses of observational studies and vitamin D supplementation randomised controlled trials
+- Supplementary table I Excess significance bias analysis of 40 meta-analyses (based on effect from the largest study; OR: odds ratio, HR: hazards ratio)
+- Excluded studies table
+- Sensitivity analysis with credibility ceilings
+- Details of evidence grading for each study
+-
+
+Addressing causality:
+
+- How many studies have pre-disease measurements? (e.g. any prognostic)
+- Check MR methods to add to possible publication
+
+
+Addressing limitations:
+
+- Update studies and carry out follow-up analysis for any updated reviews or large studies published since meta-analysis included (as an additional result, part of sensitivity).
+- Better way to address publication bias?
+- All our results indicate that higher counts increase cancer risk. Why? What happens with low accounts?
+
+See also:
+- Peer review for BMJ papers, e.g.:
+http://www.bmj.com/content/356/bmj.j477/peer-review
+
+Sensitivity analysis
+
+- How to take advantage of duplicate studies? Check overall concordance, number of duplicated studies, degree of overlap. How much research is wasted?
+- Meta-regression?
+
+Global analysis:
+
+- Use of network meta-analysis approach for differences in outcomes, in biomarker/exposure?
+- First/second result as global meta-analysis and then dissect sites? As in F-test approach.

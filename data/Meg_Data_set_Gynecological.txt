@@ -1,0 +1,110 @@
+Study	Author	HR	N	Low CI	Upper CI	Site	Outcome	HR_Largest	HR_Fixed	HR_Random
+Ethier JL	Azab 2012 	4.09	316	1.69	9.9	Breast	OS	1.63	2.14	2.56
+Ethier JL	Azab 2013	3.6	437	2.13	6.08	Breast	OS	1.63	2.14	2.56
+Ethier JL	Bozkurt 2015	2.86	85	1.04	7.86	Breast	OS	1.63	2.14	2.56
+Ethier JL	Dirican 2015	1.91	1527	1.31	2.78	Breast	OS	1.63	2.14	2.56
+Ethier JL	Forget 2014	2.35	720	1.02	5.44	Breast	OS	1.63	2.14	2.56
+Ethier JL	Jia 2015	1.63	1570	1.07	2.48	Breast	OS	1.63	2.14	2.56
+Ethier JL	Koh 2014	24.87	157	3.08	201.14	Breast	OS	1.63	2.14	2.56
+Ethier JL	Koh 2015	1.45	1435	1.08	1.95	Breast	OS	1.63	2.14	2.56
+Ethier JL	Nakano 2014	2.7	167	1.02	7.13	Breast	OS	1.63	2.14	2.56
+Ethier JL	Noh 2013	4.08	442	1.62	10.28	Breast	OS	1.63	2.14	2.56
+Ethier JL	Pistelli 2015	6.16	90	1.54	24.64	Breast	OS	1.63	2.14	2.56
+Ethier JL	Rimando 2016	2.48	461	1.57	3.9	Breast	OS	1.63	2.14	2.56
+Ethier JL	Yao 2014	3.63	608	1.59	8.26	Breast	OS	1.63	2.14	2.56
+Ethier JL	Asano 2016	11.11	61	0.35	356.75	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Pistelli 2015	5.15	90	1.11	23.89	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Bozkurt	5.46	85	1.61	18.52	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Koh 2014	2.3	157	1.64	9.15	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Nakano 2014	2	167	0.94	4.23	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Forget 2014	1.99	720	1.17	3.41	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Hong 2015	1.87	487	1.15	3.02	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Dirican 2015	1.46	1527	1.04	2.05	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Jia 2015	1.5	1570	1.14	1.98	Breast	DFS	1.5	1.69	1.74
+Ethier JL	Asher 2011	0.87	235	0.52	1.44	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Badore-Rybicka 2016	1.09	315	0.98	1.21	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Chen 2016	2.18	407	1.21	3.9	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Cho 2009	8.42	192	1.09	65.04	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Cho 2016	1.3	2456	1.05	1.62	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Cummings 2015	1.82	605	1.27	2.61	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Eo 2016	2.01	234	1.18	3.42	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Feng 2016	1.19	875	0.94	1.5	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Gungorduk 2015	3.2	91	1.1	9.31	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Haraga 2016(1)	1.54	95	0.72	3.29	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Haraga 2016 (2)	1.68	36	0.34	8.27	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Haruma 2015	3.32	320	1.15	9.54	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Kim 2016	3.45	109	1.47	8.09	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Lee 2012	1.19	1061	1.13	1.25	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Li 2015	2.3	282	0.68	7.78	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Matuso 2015	2.18	541	1.21	3.93	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Miao 2016	1.62	344	1.14	2.29	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Mizunuma 2015	2.8	56	1	7.84	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Nakamura 2015	2.56	32	0.83	7.96	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Onal 2016	3.32	235	1.91	5.79	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Takahashi 2015	2.47	508	1.45	4.21	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Thavaramara 2011	0.7	129	0.31	1.6	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Wang 2016	3.37	143	1.39	8.17	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Wang 2016	3.73	60	1.08	12.87	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Williams 2014	1.37	519	1.06	1.77	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Zhang 2015	2.17	190	1.54	3.05	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Zhang 2014	1.63	460	0.97	2.75	Gynecologic	OS	1.3	1.24	1.64
+Ethier JL	Badore-Rybicka 2016	1.22	315	1.07	1.38	Gynecologic	EFS			
+Ethier JL	Eo 2016	2.34	234	1.45	3.78	Gynecologic	EFS			
+Ethier JL	Feng 2016	1.25	875	1.05	1.49	Gynecologic	EFS			
+Ethier JL	Gungorduk 2015	2.1	91	0.66	6.7	Gynecologic	EFS			
+Ethier JL	Kim 2016	2.04	109	1.01	4.12	Gynecologic	EFS			
+Ethier JL	Miao 2016	1.73	344	1.23	2.45	Gynecologic	EFS			
+Ethier JL	Thavaramara 2011	0.7	129	0.35	1.4	Gynecologic	EFS			
+Ethier JL	Wang 2016	2.21	143	1.03	4.73	Gynecologic	EFS			
+Ethier JL	Zhang 2015	2.01	190	1.48	2.74	Gynecologic	EFS			
+Ethier JL	Haruma 2015	1.69	320	0.89	3.23	Gynecologic	EFS			
+Ethier JL	Matuso 2015	1.65	541	1.03	2.65	Gynecologic	EFS			
+Ethier JL	Chen 2016	1.99	407	1.3	3.07	Gynecologic	EFS			
+Ethier JL	Haraga 2016(1)	1.42	95	0.73	2.78	Gynecologic	EFS			
+Ethier JL	Haraga 2016(2)	0.72	36	0.16	3.32	Gynecologic	EFS			
+Ethier JL	Lee 2012	1.13	1061	1.08	1.18	Gynecologic	EFS			
+Ethier JL	Mizunuma 2015	1.53	56	1.19	1.97	Gynecologic	EFS			
+Ethier JL	Onai 2016	3.58	235	2.11	6.08	Gynecologic	EFS			
+Ethier JL	Zhang 2014	1.8	460	1.07	3.03	Gynecologic	EFS			
+Wu J	Zheng RR 2016	1.48	795	1	2.2	Cervical	OS	1.19	1.21	1.37
+Wu J	Haraga J 2016	1.42	95	0.73	2.78	Cervical	OS	1.19	1.21	1.37
+Wu J	Wang YY 2016	1.83	60	1.09	3.07	Cervical	OS	1.19	1.21	1.37
+Wu J	Onal Chem 2016	3.32	235	1.9	5.79	Cervical	OS	1.19	1.21	1.37
+Wu J	Chen L 2016	2.18	407	1.21	3.9	Cervical	OS	1.19	1.21	1.37
+Wu J	Zhou WY 2016	0.84	75	0.51	1.4	Cervical	OS	1.19	1.21	1.37
+Wu J	Mizunumq M 2015	2.8	56	0.83	9.34	Cervical	OS	1.19	1.21	1.37
+Wu J	Yang JW 2015	1.38	76	0.57	2.54	Cervical	OS	1.19	1.21	1.37
+Wu J	Li WT 2015	1.18	230	1.07	1.3	Cervical	OS	1.19	1.21	1.37
+Wu J	Zhang Y 2014	1.63	460	0.97	2.75	Cervical	OS	1.19	1.21	1.37
+Wu J	Wang D 2013	1.32	111	0.91	1.91	Cervical	OS	1.19	1.21	1.37
+Wu J	Lee YY 2012	1.19	1061	1.13	1.25	Cervical	OS	1.19	1.21	1.37
+Wu J	Haraga L 2016	1.54	95	0.72	3.29	Cervical	PFS	1.13	1.19	1.71
+Wu J	Wang YY 2016	2.13	60	1.27	3.58	Cervical	PFS	1.13	1.19	1.71
+Wu J	Onal Chem 2016	3.58	235	2.11	6.08	Cervical	PFS	1.13	1.19	1.71
+Wu J	Mizunuma M 2015	1.53	56	1.19	1.97	Cervical	PFS	1.13	1.19	1.71
+Wu J	Yang JW 2015	2.99	76	1.15	3.81	Cervical	PFS	1.13	1.19	1.71
+Wu J	Li WT 2015	1.08	230	0.79	1.3	Cervical	PFS	1.13	1.19	1.71
+Wu J	Wang Y 2015	1.81	68	1.12	2.91	Cervical	PFS	1.13	1.19	1.71
+Wu J	Zhang Y 2014	1.8	460	1.7	3.03	Cervical	PFS	1.13	1.19	1.71
+Wu J	Wang D 2013	1.36	111	0.94	1.97	Cervical	PFS	1.13	1.19	1.71
+Wu J	Yee YY 2012	1.13	1061	1.08	1.18	Cervical	PFS	1.13	1.19	1.71
+Huang QT	Cho H 2009	8.42	999	1.09	64.84	Ovarian	OS			
+Huang QT	Thavaramara T 2011	1.43	128	0.63	3.33	Ovarian	OS			
+Huang QT	Asher V 2011	0.87	235	0.52	1.44	Ovarian	OS			
+Huang QT	Kim HS 2016	3.45	190	1.47	7.7	Ovarian	OS			
+Huang QT	Williams KA 2014	1.43	519	1.13	1.81	Ovarian	OS			
+Huang QT	Wang Y 2015	5.3	126	1.82	15.47	Ovarian	OS			
+Huang QT	Zhang WW 2015	2.17	190	1.54	3.05	Ovarian	OS			
+Huang QT	Nakamura K 2016	14.13	30	1.21	165.4	Ovarian	OS			
+Huang QT	Wang YQ 2016	3.37	143	1.39	8.15	Ovarian	OS			
+Huang QT	Feng Z 2016	1.19	875	0.94	1.5	Ovarian	OS			
+Huang QT	Miao Y 2016	1.62	334	1.14	2.3	Ovarian	OS			
+Huang QT	Raugkaewmanee S 2012	0.85	166	0.46	1.6	Ovarian	OS			
+Huang QT	Thavaramara T 2011	1.43	128	0.71	3.33	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Kim HS 2016	2.04	190	1.01	4	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Wang Y 2015	3.55	126	1.39	9.1	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Zhang WW 2015	2.01	190	1.48	2.74	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Wang YQ 2016	2.2	143	1.03	4.7	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Feng Z 2016	1.25	875	1.05	1.48	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Miao Y 2016	1.73	334	1.23	2.45	Ovarian	PFS	1.25	1.47	1.63
+Huang QT	Raugkaewmanee S 2012	0.89	166	0.38	1.64	Ovarian	PFS	1.25	1.47	1.63
